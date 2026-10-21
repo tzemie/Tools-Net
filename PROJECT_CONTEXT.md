@@ -1,6 +1,6 @@
 # 项目上下文
 
-更新时间：2026-09-15
+更新时间：2026-10-21
 
 ## 用途与正式资料源
 
@@ -48,6 +48,17 @@
 
 - 在目标 ChatGPT 项目中配置指向本仓库的指令，并从该项目实际读取这些文件以验证可用性。
 - 根据具体需求逐项维护现有客户端配置与工具。
+
+## 结论记录
+
+### 2026-10-21 Loon：Tailscale 域名的分流
+
+- 问题：Loon 本地 `[Rule]` 将 `tailscale.com`、`ts.net`、`tailscale.io` 交给 `Final Proxy`，`Loon/Rules/Direct.list` 又将同样三个域名列为直连，两处相互矛盾。
+- 已确认决定：这三个域名只在 Loon 本地 `[Rule]` 维护，走 `Final Proxy`；`Direct.list` 删除这三条，保留 `IP-CIDR,100.64.0.0/10,no-resolve`。
+- 依据：Loon 规则来源优先级为本地 > 插件 > 远程，`Direct.list` 中的这三条原本不生效。iOS 同一时间只运行一个 VPN，Loon 开启时 Tailscale 隧道不经过 Loon，这三条只影响 Loon 开启期间访问 Tailscale 网站和管理后台。
+- 实施状态：已修改 `Loon/Rules/Direct.list`。
+- 验证结果：提交前已逐行检查差异；未在设备上做连接测试。
+- 待办：运行 Tailscale 的其他设备，其直连或代理在该设备所在网络的代理层另行决定。
 
 ## 后续结论记录格式
 

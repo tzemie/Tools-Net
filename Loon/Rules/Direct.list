@@ -19,9 +19,6 @@ DOMAIN-SUFFIX,moomoo.com
 DOMAIN-SUFFIX,moomoo.io
 
 # Tailscale
-DOMAIN-SUFFIX,tailscale.com
-DOMAIN-SUFFIX,ts.net
-DOMAIN-SUFFIX,tailscale.io
 IP-CIDR,100.64.0.0/10,no-resolve
 
 # Hong Kong Government
